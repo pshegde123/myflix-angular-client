@@ -17,3 +17,18 @@ html {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.main-page{  
+  height: 25%;
+  width: 35%;
+  margin: auto;
+  margin-top: 15%;
+}
+.welcome-card-header {
+  justify-content: center;
+  display: flex;
+  margin-bottom: 100px;
+}
+.welcome-card-content {
+  justify-content: center;
+  display: flex;
+}
