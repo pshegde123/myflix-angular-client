@@ -24,6 +24,7 @@ import {MatListModule} from '@angular/material/list';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MovieDialogComponent } from './movie-dialog/movie-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     MovieCardComponent,
     WelcomePageComponent,
     MessageBoxComponent,
-    ProfileViewComponent
+    ProfileViewComponent,
+    MovieDialogComponent
   ],
   imports: [
     BrowserModule,
