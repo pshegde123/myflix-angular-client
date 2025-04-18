@@ -22,6 +22,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { MessageBoxComponent } from './message-box/message-box.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 
 const appRoutes: Routes = [
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
     UserLoginFormComponent,
     MovieCardComponent,
     WelcomePageComponent,
-    MessageBoxComponent
+    MessageBoxComponent,
+    ProfileViewComponent
   ],
   imports: [
     BrowserModule,
