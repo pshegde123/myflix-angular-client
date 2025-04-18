@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 import { MatDialog } from '@angular/material/dialog';
 import { MessageBoxComponent } from '../message-box/message-box.component';
 
+
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -16,7 +17,9 @@ export class MovieCardComponent {
   breakpoint:number = 1;
   readonly dialog = inject(MatDialog);
   private snackBar!: MatSnackBar; // Inject MatSnackBar
+  
   constructor(public fetchApiData: FetchApiDataService) { 
+     
   }
 
 ngOnInit(): void {
@@ -143,6 +146,14 @@ toggleFavorite(movie: any): void {
     );
   }
 }
+userLogout(): void {
+
+  // Clear token from local storage
+  localStorage.removeItem('token');
+  // Navigate to the welcome page
+  window.location.href = '/welcome';
+}
+
 getMovies(): void {
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
