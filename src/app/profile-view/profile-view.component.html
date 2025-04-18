@@ -1,1 +1,114 @@
-<p>profile-view works!</p>
+<mat-toolbar style="background-color: rgb(233, 147, 164)">
+  <span>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      #menuTrigger="matMenuTrigger"
+      (mouseover)="menuTrigger.openMenu()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <span (mouseleave)="menuTrigger.closeMenu()">
+        <button mat-menu-item (click)="openHome()">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item (click)="userLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </span>
+    </mat-menu>
+  </span>
+  <span style="font-size: 28px; font-weight: bold; margin: auto">MyFlix</span>
+</mat-toolbar>
+<div class="profile-container">
+  <h2>User Profile</h2>
+  <div class="profile-info" *ngIf="!isEditing">
+    <p><strong>Username:</strong> {{ userData.Username }}</p>
+    <p><strong>Email:</strong> {{ userData.Email }}</p>
+    <p><strong>Birthday:</strong> {{ userData.Birthday | date }}</p>
+    <div class="profile-buttons">
+      <button class="btn btn-primary">Edit Profile</button>
+      <button class="btn btn-danger">Delete Profile</button>
+    </div>
+  </div>
+
+  <form *ngIf="isEditing" (ngSubmit)="saveChanges()">
+    <div class="form-group">
+      <label for="Username">Username</label>
+      <input id="Username" formControlName="Username" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="Password">Password</label>
+      <input
+        id="Password"
+        type="password"
+        formControlName="Password"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="Email">Email</label>
+      <input id="Email" formControlName="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="Birthday">Birthday</label>
+      <input
+        id="Birthday"
+        type="date"
+        formControlName="Birthday"
+        class="form-control"
+      />
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <button type="button" class="btn btn-secondary">Cancel</button>
+  </form>
+</div>
+
+<div class="favorite-movies-section">
+  <h2>Your Favorite Movies</h2>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-indicator">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading your favorite movies...</p>
+  </div>
+
+  <!-- Movies Grid -->
+  <div *ngIf="!isLoading && favoriteMovies.length > 0" class="movies-grid">
+    <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
+      <img
+        [src]="
+          movie.ImageUrl || 'https://via.placeholder.com/300x400?text=No+Image'
+        "
+        alt="{{ movie.Title }}"
+        class="movie-image"
+      />
+      <mat-card-title>{{ movie.Title }}</mat-card-title>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="showGenre(movie)">
+          Genre
+        </button>
+        <button mat-button color="primary" (click)="showDirector(movie)">
+          Director
+        </button>
+        <button mat-button color="primary" (click)="showDetail(movie)">
+          Synopsis
+        </button>
+        <!-- Favorite toggle button -->
+        <mat-icon class="favorited"> favorite </mat-icon>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Fallback Message -->
+  <div *ngIf="!isLoading && favoriteMovies.length === 0">
+    <h3>You don't have any favorite movies yet!</h3>
+  </div>
+</div>

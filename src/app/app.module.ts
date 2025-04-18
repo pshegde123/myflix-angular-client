@@ -23,11 +23,13 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: ProfileViewComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -59,7 +61,8 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatGridTile,
     RouterModule.forRoot(appRoutes),
-    MatIconModule],
+    MatIconModule,
+    MatProgressSpinnerModule],
   providers: [],
   bootstrap: [AppComponent]
 })

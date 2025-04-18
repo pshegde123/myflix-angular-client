@@ -153,8 +153,10 @@ userLogout(): void {
   // Navigate to the welcome page
   window.location.href = '/welcome';
 }
-
-getMovies(): void {
+openProfile(): void {
+  window.location.href = '/profile';
+}
+getMovies(): void { 
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       console.log(this.movies);

@@ -1,0 +1,25 @@
+.login-card{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.login-card-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.login-card-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+}
+.login-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
