@@ -36,7 +36,7 @@ showGenre(movie: any): void {
           title: String(movie.genre.name).toUpperCase(),
           content: movie.genre.description
       },
-      width: "30%"
+      width: "40%"
   })
 }
 showDirector(movie: any): void {
@@ -45,7 +45,7 @@ showDirector(movie: any): void {
           title: String(movie.director.name).toUpperCase(),
           content: movie.director.bio
       },
-      width: "30%"
+      width: "40%"
   })
 }
 showDetail(movie: any): void {
@@ -54,7 +54,7 @@ showDetail(movie: any): void {
           title: movie.title,
           content: movie.description
       },
-      width: "30%"
+      width: "40%"
   })
 }
 /**

@@ -34,12 +34,16 @@
     <p><strong>Email:</strong> {{ userData.Email }}</p>
     <p><strong>Birthday:</strong> {{ userData.Birthday | date }}</p>
     <div class="profile-buttons">
-      <button class="btn btn-primary">Edit Profile</button>
-      <button class="btn btn-danger">Delete Profile</button>
+      <button class="btn btn-primary" (click)="enableEdit()">
+        Edit Profile
+      </button>
+      <button class="btn btn-danger" (click)="confirmDelete()">
+        Delete Profile
+      </button>
     </div>
   </div>
 
-  <form *ngIf="isEditing" (ngSubmit)="saveChanges()">
+  <form [formGroup]="editForm" *ngIf="isEditing" (ngSubmit)="saveChanges()">
     <div class="form-group">
       <label for="Username">Username</label>
       <input id="Username" formControlName="Username" class="form-control" />
@@ -67,7 +71,9 @@
       />
     </div>
     <button type="submit" class="btn btn-success">Save</button>
-    <button type="button" class="btn btn-secondary">Cancel</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+      Cancel
+    </button>
   </form>
 </div>
 
@@ -85,12 +91,12 @@
     <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
       <img
         [src]="
-          movie.ImageUrl || 'https://via.placeholder.com/300x400?text=No+Image'
+          movie.image || 'https://via.placeholder.com/300x400?text=No+Image'
         "
-        alt="{{ movie.Title }}"
+        alt="{{ movie.title }}"
         class="movie-image"
       />
-      <mat-card-title>{{ movie.Title }}</mat-card-title>
+      <mat-card-title>{{ movie.title }}</mat-card-title>
       <mat-card-actions>
         <button mat-button color="primary" (click)="showGenre(movie)">
           Genre
@@ -102,7 +108,9 @@
           Synopsis
         </button>
         <!-- Favorite toggle button -->
-        <mat-icon class="favorited"> favorite </mat-icon>
+        <mat-icon (click)="removeFavorite(movie)" class="favorited">
+          favorite
+        </mat-icon>
       </mat-card-actions>
     </mat-card>
   </div>

@@ -1,0 +1,25 @@
+.signup-card{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.signup-card-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.signup-card-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+}
+.signup-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

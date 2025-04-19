@@ -130,6 +130,7 @@ export class FetchApiDataService {
 
   // Make api call for editing a user
   public editUser(username: string, userDetails: any): Observable<any> {
+    console.log("userDetails=",userDetails);
     const token = localStorage.getItem('token');
     return this.http
       .put(apiUrl + `users/${username}`, userDetails, {

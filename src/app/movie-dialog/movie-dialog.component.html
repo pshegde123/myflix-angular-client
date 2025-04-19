@@ -1,1 +1,30 @@
-<p>movie-dialog works!</p>
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <!-- Genre Details -->
+  <div *ngIf="type === 'genre'">
+    <p><strong>Genre:</strong> {{ data?.Name }}</p>
+    <p>
+      <strong>Description:</strong>
+      {{ data?.Description || "No description available." }}
+    </p>
+  </div>
+
+  <!-- Director Details -->
+  <div *ngIf="type === 'director'">
+    <p><strong>Director:</strong> {{ data?.Name }}</p>
+    <p><strong>Bio:</strong> {{ data?.Bio || "No biography available." }}</p>
+  </div>
+
+  <!-- Synopsis -->
+  <div *ngIf="type === 'synopsis'">
+    <p>{{ data?.Description || "No synopsis available." }}</p>
+  </div>
+
+  <!-- Fallback -->
+  <div *ngIf="!type">
+    <p>No data available for this section.</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
