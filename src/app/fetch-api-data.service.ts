@@ -129,13 +129,12 @@ export class FetchApiDataService {
   }
 
   // Make api call for editing a user
-  public editUser(username: string, userDetails: any): Observable<any> {
-    console.log("userDetails=",userDetails);
+  public editUser(username: string, userDetails: any): Observable<any> {    
     const token = localStorage.getItem('token');
-    return this.http
-      .put(apiUrl + `users/${username}`, userDetails, {
+    //console.log('Editing user:', userDetails);     
+    return this.http.put(apiUrl + `users/${username}`, JSON.parse(userDetails), {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,          
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));

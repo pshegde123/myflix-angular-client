@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup,ReactiveFormsModule } from '@angular/forms';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageBoxComponent } from '../message-box/message-box.component';
-
+import { formatDate } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import moment from 'moment'; // Import moment for date formatting
 
 @Component({
   selector: 'app-profile-view',
@@ -46,9 +47,9 @@ export class ProfileViewComponent implements OnInit {
       console.error("Username not found in localStorage.");
       return;
     }
-    this.fetchApiDataService.getUser(username).subscribe((resp: any) => {      
-      this.userData = resp;
-       console.log('User data:', this.userData); // Debug user data
+    this.fetchApiDataService.getUser(username).subscribe((resp: any) => {     
+      //console.log('User data fetched:', resp);        
+      this.userData = resp;       
       // Once user data is loaded, fetch and filter favorite movies
       this.loadFavoriteMovies();
     });
@@ -96,8 +97,7 @@ export class ProfileViewComponent implements OnInit {
   getUserData(): void {
     this.fetchApiDataService.getAllMovies().subscribe((resp: any) => {
       console.log('User data:', resp);
-      this.userData = resp;
-      // console.log(this.userData);
+      this.userData = resp;      
       // console.log('FavoriteMovies (IDs):', this.userData.FavoriteMovies);
 
       if (this.userData.FavoriteMovies?.length > 0) {
@@ -131,14 +131,13 @@ export class ProfileViewComponent implements OnInit {
       if (!username) {
         console.error("Username not found in localStorage.");
         return;
-      }
-      console.log("form values = ",JSON.stringify(this.editForm.value));
+      }      
       this.fetchApiDataService
           .editUser(username,JSON.stringify(this.editForm.value))
           .subscribe((resp: any) => {
             //console.log(resp);
             this.isEditing = false;
-            this.getUserData();
+            window.location.href = '/profile';
           });
       }
   }
@@ -205,17 +204,14 @@ export class ProfileViewComponent implements OnInit {
       //this.favoriteMovies = resp.FavoriteMovies || [];
       //console.log('Favorite Movies:', this.favoriteMovies);
       
-      let favoriteMoviesList = resp.FavoriteMovies || [];
-      console.log('Favorite Movies List1:', favoriteMoviesList);
+      let favoriteMoviesList = resp.FavoriteMovies || [];      
 
       this.fetchApiDataService.getAllMovies().subscribe((movies: any) => {
 
         this.favoriteMovies = movies.filter((movie: any) =>           
           favoriteMoviesList.some((fav: any) => {            
             return String(fav) === String(movie._id)})
-        );
-        console.log('Favorite Movies List2:', this.favoriteMovies);
-        console.log('Filtered Favorite Movies:', this.favoriteMovies);
+        );        
         this.isLoading = false; // Loading complete
       });      
     });    
