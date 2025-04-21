@@ -187,8 +187,8 @@ export class ProfileViewComponent implements OnInit {
     );
     localStorage.removeItem('token');
         localStorage.removeItem('user');
-        alert('Your profile has been deleted.');
-        window.location.href = '/welcome'; // Redirect to login or home page
+        alert('Your profile has been deleted.');        
+        this.router.navigate(['welcome']);
   }
 
   /**
