@@ -6,6 +6,7 @@ import { MessageBoxComponent } from '../message-box/message-box.component';
 import { formatDate } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import moment from 'moment'; // Import moment for date formatting
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-view',
@@ -30,7 +31,8 @@ export class ProfileViewComponent implements OnInit {
     private fetchApiDataService: FetchApiDataService,   
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.editForm = this.formBuilder.group({
       Username: [''],
@@ -54,15 +56,15 @@ export class ProfileViewComponent implements OnInit {
       this.loadFavoriteMovies();
     });
   }
-  openHome(): void {
-    window.location.href = '/movies';
+  openHome(): void {   
+    this.router.navigate(['movies']);
   }
   userLogout(): void {
 
     // Clear token from local storage
     localStorage.removeItem('token');
-    // Navigate to the welcome page
-    window.location.href = '/welcome';
+    // Navigate to the welcome page    
+    this.router.navigate(['welcome']);
   }
   showGenre(movie: any): void {
     this.dialog.open(MessageBoxComponent, {
@@ -136,8 +138,8 @@ export class ProfileViewComponent implements OnInit {
           .editUser(username,JSON.stringify(this.editForm.value))
           .subscribe((resp: any) => {
             //console.log(resp);
-            this.isEditing = false;
-            window.location.href = '/profile';
+            this.isEditing = false;            
+            this.router.navigate(['profile']);
           });
       }
   }

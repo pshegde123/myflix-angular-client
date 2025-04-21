@@ -3,7 +3,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 import { MatDialog } from '@angular/material/dialog';
 import { MessageBoxComponent } from '../message-box/message-box.component';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -18,7 +18,7 @@ export class MovieCardComponent {
   readonly dialog = inject(MatDialog);
   private snackBar!: MatSnackBar; // Inject MatSnackBar
   
-  constructor(public fetchApiData: FetchApiDataService) { 
+  constructor(public fetchApiData: FetchApiDataService,private router: Router) { 
      
   }
 
@@ -150,11 +150,11 @@ userLogout(): void {
 
   // Clear token from local storage
   localStorage.removeItem('token');
-  // Navigate to the welcome page
-  window.location.href = '/welcome';
+  // Navigate to the welcome page  
+  this.router.navigate(['welcome']);
 }
-openProfile(): void {
-  window.location.href = '/profile';
+openProfile(): void { 
+  this.router.navigate(['profile']);
 }
 getMovies(): void { 
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
