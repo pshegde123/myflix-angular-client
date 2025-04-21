@@ -1,4 +1,5 @@
 # MyFlixAngularClient
+![App home page image](./angular-app-image.png)
 
 This project was done as part of coursework for CareerFoundry. This is a responsive client-side for an application called myFlix.
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
