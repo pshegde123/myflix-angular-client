@@ -1,6 +1,16 @@
 # MyFlixAngularClient
 
+This project was done as part of coursework for CareerFoundry. 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+
+# Features
+* User registration and authentication
+* Browse movie collection
+* View movie details, genres, and directors
+* Add/remove movies to favorites
+* Edit user profile with secure handling of credential updates
+* Responsive design using Angular Material
+* Remove user profile
 
 ## Development server
 
