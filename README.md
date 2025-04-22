@@ -1,6 +1,26 @@
 # MyFlixAngularClient
+![App home page image](./angular-app-image.png)
 
+This project was done as part of coursework for CareerFoundry. This is a responsive client-side for an application called myFlix.
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+
+# Features
+* Designed using Angular Material
+* User registration and authentication
+* Browse movie collection
+* View movie details, genres, and directors
+* Add/remove movies to favorites
+* Edit user profile with secure handling of credential updates
+* Responsive design using Angular Material
+* Remove user profile
+
+## Live URL
+URL : [https://pshegde123.github.io/myFlix-angular-app/welcome](https://pshegde123.github.io/myFlix-angular-app/welcome)  
+gh-pages repo: Deployed on "myflix-angular-app" repo
+
+## Technologies
+* Angular Material - Component-based UI library for building user interfaces.
+* MongoDB - Movie data is preloaded and retrieved from mongodb
 
 ## Development server
 
