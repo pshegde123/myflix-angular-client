@@ -16,9 +16,11 @@ export class MovieCardComponent {
   favoriteMovies: string[] = []; // Store IDs of favorited movies
   breakpoint:number = 1;
   readonly dialog = inject(MatDialog);
-  private snackBar!: MatSnackBar; // Inject MatSnackBar
+ 
   
-  constructor(public fetchApiData: FetchApiDataService,private router: Router) { 
+  constructor(public fetchApiData: FetchApiDataService,
+    private router: Router,
+    private snackBar: MatSnackBar) { 
      
   }
 
@@ -70,7 +72,7 @@ getFavoriteMovies(): void {
   }
   this.fetchApiData.getUserFavorites(username).subscribe((resp: any) => {
     this.favoriteMovies = resp.FavoriteMovies || [];
-    console.log('Favorite Movies:', this.favoriteMovies);
+    //console.log('Favorite Movies:', this.favoriteMovies);
   });
 }
 /**
@@ -90,7 +92,7 @@ isFavorite(movie: any): boolean {
    * @returns {void} Shows a snackbar notification
    */
 toggleFavorite(movie: any): void {
-  console.log('Toggling favorite for movie:', movie);
+  //console.log('Toggling favorite for movie:', movie);
   const user = localStorage.getItem("user");
   let username = user ? JSON.parse(user).Username : null;
   if (!username) {
@@ -101,20 +103,20 @@ toggleFavorite(movie: any): void {
   if (this.isFavorite(movie)) {
     // Remove from favorites
     this.fetchApiData.removeMovieFromFavorites(username,movie._id).subscribe(
-      () => {
-        console.log(`${movie.Title} removed from favorites.`);
+      (resp) => {        
+        //console.log(`${movie.Title} removed from favorites.`);
         this.favoriteMovies = this.favoriteMovies.filter(
           (id) => id !== movie._id
         ); // Update UI
         // Show a snackbar notification
-        this.snackBar.open(`${movie.Title} removed from favorites.`, 'OK', {
+        this.snackBar.open(`${movie.title} removed from favorites.`, 'OK', {
           duration: 3000,
         });
       },
       (error) => {
-        console.error(`Error removing ${movie.Title} from favorites:`, error);
+        console.error(`Error removing ${movie.title} from favorites:`, error);
         this.snackBar.open(
-          `Could not remove ${movie.Title} from favorites.`,
+          `Could not remove ${movie.title} from favorites.`,
           'OK',
           {
             duration: 3000,
@@ -123,20 +125,20 @@ toggleFavorite(movie: any): void {
       }
     );
   } else {
-    // Add to favorites
+    // Add to favorites    
     this.fetchApiData.addMovieToFavorites(username,movie._id).subscribe(
       () => {
-        console.log(`${movie.Title} added to favorites.`);
+        //console.log(`${movie.Title} added to favorites.`);
         this.favoriteMovies.push(movie._id); // Update UI
         // Show a snackbar notification
-        this.snackBar.open(`${movie.Title} added to favorites.`, 'OK', {
+        this.snackBar.open(`${movie.title} added to favorites.`, 'OK', {
           duration: 3000,
         });
       },
       (error) => {
         console.error(`Error adding ${movie.Title} to favorites:`, error);
         this.snackBar.open(
-          `Could not add ${movie.Title} to favorites.`,
+          `Could not add ${movie.title} to favorites.`,
           'OK',
           {
             duration: 3000,
@@ -159,7 +161,7 @@ openProfile(): void {
 getMovies(): void { 
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      //console.log(this.movies);
       return this.movies;
     });
   }
