@@ -42,6 +42,11 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   *  Initializes the component.
+   *  This method is called when the component is created.
+   * @returns void
+   */
   ngOnInit(): void {
     const user = localStorage.getItem("user");
     let username = user ? JSON.parse(user).Username : null;
@@ -56,9 +61,16 @@ export class ProfileViewComponent implements OnInit {
       this.loadFavoriteMovies();
     });
   }
+  /**
+   * Navigates to the home page (movies list).
+   * This method is typically called when the user clicks on a home button or link.
+   */
   openHome(): void {   
     this.router.navigate(['movies']);
   }
+  /**
+   * Logs out the user by clearing the token from local storage and navigating to the welcome page.
+   */
   userLogout(): void {
 
     // Clear token from local storage
@@ -66,6 +78,10 @@ export class ProfileViewComponent implements OnInit {
     // Navigate to the welcome page    
     this.router.navigate(['welcome']);
   }
+  /**
+   * Opens a dialog to show the genre of a movie.
+   * @param movie The movie object containing genre information.
+   */
   showGenre(movie: any): void {
     this.dialog.open(MessageBoxComponent, {
         data: {
@@ -75,6 +91,11 @@ export class ProfileViewComponent implements OnInit {
         width: "30%"
     })
   }
+  /**
+   * Opens a dialog to show the director of a movie.
+   * @param movie - The movie object containing director information
+   * @returns void
+   */
   showDirector(movie: any): void {
     this.dialog.open(MessageBoxComponent, {
         data: {
@@ -84,6 +105,12 @@ export class ProfileViewComponent implements OnInit {
         width: "30%"
     })
   }
+
+  /**
+   * Opens a dialog to show the details of a movie.
+   * @param movie The movie JSON object containing details to display.     
+   * @returns void
+   */
   showDetail(movie: any): void {
     this.dialog.open(MessageBoxComponent, {
         data: {
@@ -94,7 +121,11 @@ export class ProfileViewComponent implements OnInit {
     })
   }
   /**
-   * Fetches user data and favorite movies.
+   * Fetches user data and favorite movies and populates the userData object.
+   * This method is called when the component initializes.
+   * It retrieves the user's profile information and favorite movies from the API.
+   *  @param {void}  No parameters are required for this method.
+   *  @returns {void}  This method does not return any value.
    */
   getUserData(): void {
     this.fetchApiDataService.getAllMovies().subscribe((resp: any) => {
@@ -115,16 +146,18 @@ export class ProfileViewComponent implements OnInit {
       });
     });
   }
-
-  /**
-   * Enables editing of user data.
-   */
+  
   enableEdit(): void {
     this.isEditing = true;
   }
 
   /**
-   * Saves changes to user data.
+   * Save changes in the edit form to the database.
+   * This method is called when the user submits the edit form.
+   * It validates the form, retrieves the username from local storage,
+   * and sends the updated user data to the API.
+   * @param {void} - No parameters are required for this method.
+   * @returns {void} - This method does not return any value.
    */
   saveChanges(): void {
     if (this.editForm.valid) {
@@ -157,7 +190,7 @@ export class ProfileViewComponent implements OnInit {
   }
 
   /**
-   * Confirms and deletes the user profile.
+   * Confirms and deletes the user profile from the database.
    * If confirmed, the deleteProfile method is called.
    * If canceled, the dialog is closed.
    */
@@ -173,6 +206,8 @@ export class ProfileViewComponent implements OnInit {
   /**
    * Deletes the user profile.
    * On success, the user is logged out and redirected to the login or home page.
+   * @param {void} - No parameters are required for this method.
+   * @returns {void} - This method does not return any value.
    */
   deleteProfile(): void {
     const user = localStorage.getItem("user");
@@ -192,8 +227,10 @@ export class ProfileViewComponent implements OnInit {
   }
 
   /**
-   * Fetches and filters favorite movies.
-   * The favoriteMovies array is populated with full movie details.
+   * Fetches and filters users favorite movies.
+   * The favoriteMovies array is populated with users favorite movie id's.
+   *  @param {void} - No parameters are required for this method.
+   *  @returns {void} - This method does not return any value.
    */
   loadFavoriteMovies(): void {
     const user = localStorage.getItem("user");
@@ -220,9 +257,7 @@ export class ProfileViewComponent implements OnInit {
   }
 
   /**
-   * Opens a dialog for a movie, which displays movie details.
-   * @param type - The type of dialog to open.
-   * @param data - The movie data to display in the dialog.
+   * Unused method
    */
   openDialog(type: string, data: any): void {
     // console.log('Dialog Type:', type);
@@ -235,7 +270,9 @@ export class ProfileViewComponent implements OnInit {
 
   /**
    * Removes a movie from favorites.
-   * @param movie - The movie to remove.
+   * This method updates the favoriteMovies array to reflect the removal of the movie.
+   * @param movie - The movie JSON object.
+   * @returns {void} - This method does not return any value.   
    */
   removeFavorite(movie: any): void {
     const user = localStorage.getItem("user");

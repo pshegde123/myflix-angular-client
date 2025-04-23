@@ -5,6 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MessageBoxComponent } from '../message-box/message-box.component';
 import { Router } from '@angular/router';
 
+/**
+ * Component for the movie card, which displays movie details.
+ * It fetches all movies from the database and displays them in cards.
+ * It also allows users to add and remove movies from their favorites.
+ */
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -32,6 +37,12 @@ ngOnInit(): void {
 onResize(event:any) {
   this.breakpoint = (event.target.innerWidth <= 1200) ? 1 : 5;
 }
+
+/**
+   * Display selected movies genre details in a dialog box.
+   * @param {any} movie - The JSON movie object.
+   * @returns {void} 
+   */
 showGenre(movie: any): void {
   this.dialog.open(MessageBoxComponent, {
       data: {
@@ -41,6 +52,12 @@ showGenre(movie: any): void {
       width: "40%"
   })
 }
+
+/**
+   * Display selected movies director details in a dialog box.
+   * @param {any} movie - The JSON movie object
+   * @returns {void} 
+   */
 showDirector(movie: any): void {
   this.dialog.open(MessageBoxComponent, {
       data: {
@@ -50,6 +67,11 @@ showDirector(movie: any): void {
       width: "40%"
   })
 }
+/**
+   * Display selected movie description details in a dialog box.
+   * @param {any} movie - The JSON movie object
+   * @returns {void} 
+   */
 showDetail(movie: any): void {
   this.dialog.open(MessageBoxComponent, {
       data: {
@@ -60,8 +82,8 @@ showDetail(movie: any): void {
   })
 }
 /**
-   * Fetches the user's favorite movies from the database.
-   * @returns {void} Favorite movies array
+   * Fetches the user's favorite movies from the database into the favoriteMovies array.
+   * @returns {void} 
    */
 getFavoriteMovies(): void {
   const user = localStorage.getItem("user");
@@ -148,6 +170,12 @@ toggleFavorite(movie: any): void {
     );
   }
 }
+
+/**
+ * Logs out the user by removing the token from local storage
+  * and navigating to the welcome page.
+  * @returns {void} Navigates to the welcome page after logout
+ */
 userLogout(): void {
 
   // Clear token from local storage
@@ -155,9 +183,18 @@ userLogout(): void {
   // Navigate to the welcome page  
   this.router.navigate(['welcome']);
 }
+/**
+ * Navigates to the profile page.
+ * * @returns {void} Navigates to the profile page
+ */
 openProfile(): void { 
   this.router.navigate(['profile']);
 }
+
+ /**
+   * Fetches all movies from the database.
+   * @returns {void} Movies array
+   */
 getMovies(): void { 
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
